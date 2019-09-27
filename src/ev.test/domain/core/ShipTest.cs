@@ -10,7 +10,7 @@ namespace ev.test.domain.core
         public void RegisterShipSuccess()
         {
             var ship = new Ship();
-            ship.RegisterShip("name", "code", new Port("port"));
+            ship.RegisterShip("name", "code", new Port() { Name = "port" } );
 
             Assert.Equal("name", ship.Name);
             Assert.Equal("code", ship.RegistrationCode);
@@ -22,14 +22,14 @@ namespace ev.test.domain.core
         public void RegisterShipAlreadyRegistered()
         {
             var ship = new Ship();
-            ship.RegisterShip("name", "code", new Port("port"));
+            ship.RegisterShip("name", "code", new Port() { Name = "port" });
 
             Assert.Equal("name", ship.Name);
             Assert.Equal("code", ship.RegistrationCode);
             Assert.NotNull(ship.Location);
             Assert.Equal("port", ship.Location.Name);
 
-            Assert.Throws<Exception>(() => ship.RegisterShip("other name", "other code", new Port("other port")));
+            Assert.Throws<Exception>(() => ship.RegisterShip("other name", "other code", new Port() { Name = "other port" }));
         }
 
         [Fact(DisplayName = "RegisterShip:Null Port")]

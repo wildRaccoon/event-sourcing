@@ -1,27 +1,25 @@
 using ev.lib.domain.core;
-using ev.lib.domain.interfaces;
-using ev.lib.persistence.events;
 
 namespace ev.lib.domain.events
 {
     public class RegisterShipEvent : DomainEvent
     {
-        RegisterShipEventData storeEvent;
-        IEntityContainer entityContainer;
+        Ship ship;
+        Port port;
+        string shipName;
+        string shipRegCode;
 
-        public RegisterShipEvent(RegisterShipEventData registerShipEvent, IEntityContainer entityContainer)
+        public RegisterShipEvent(Ship ship, Port port, string shipName,string shipRegCode)
         {
-            this.entityContainer = entityContainer;
-            this.storeEvent = registerShipEvent;
+            this.ship = ship;
+            this.port = port;
+            this.shipName = shipName;
+            this.shipRegCode = shipRegCode;
         }
 
         public override void Process()
         {
-            var ship = entityContainer.Create<Ship>();
-            var port = entityContainer.Get<Port>(storeEvent.Port);
-
-            ship.RegisterShip(storeEvent.Name,storeEvent.Port,port);
-            entityContainer.Update(ship);
+            ship.RegisterShip(shipName, shipRegCode, port);
         }
     }
 }
