@@ -4,6 +4,11 @@ namespace ev.lib.domain.core
     {
         public string Name {get; private set;}
 
-        public static Port AT_SEA { get => new Port(){ Name = "At Sea" }; }
+        public static Port AT_SEA { get => new Port("At Sea"); }
+
+        public Port(string name)
+        {
+            Name = name;
+        }
     }
 }

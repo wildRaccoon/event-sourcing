@@ -4,6 +4,6 @@ namespace ev.lib.domain.events
     {
         public long UTCreated;
         public long UTProcessed;
-        public abstract void Process();        
+        public abstract void Process();
     }
 }
