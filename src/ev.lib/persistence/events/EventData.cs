@@ -1,6 +1,6 @@
 namespace ev.lib.persistence
 {
-    public class StoreEvent
+    public class EventData
     {
         public string Id {get; set;}
         public long UTCreated {get; set;}

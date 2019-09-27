@@ -1,15 +1,15 @@
 using ev.lib.domain.core;
 using ev.lib.domain.interfaces;
-using ev.lib.persistence;
+using ev.lib.persistence.events;
 
 namespace ev.lib.domain.events
 {
     public class RegisterShipEvent : DomainEvent
     {
-        RegisterShipStoreEvent storeEvent;
+        RegisterShipEventData storeEvent;
         IEntityContainer entityContainer;
 
-        public RegisterShipEvent(RegisterShipStoreEvent registerShipEvent, IEntityContainer entityContainer)
+        public RegisterShipEvent(RegisterShipEventData registerShipEvent, IEntityContainer entityContainer)
         {
             this.entityContainer = entityContainer;
             this.storeEvent = registerShipEvent;

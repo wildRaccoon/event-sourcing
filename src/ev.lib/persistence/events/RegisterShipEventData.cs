@@ -1,6 +1,6 @@
-namespace ev.lib.persistence
+namespace ev.lib.persistence.events
 {
-    public class RegisterShipStoreEvent : StoreEvent
+    public class RegisterShipEventData : EventData
     {
         public string RegistrationCode {get; set;}
 
@@ -8,7 +8,7 @@ namespace ev.lib.persistence
 
         public string Port {get; set;}
 
-        public RegisterShipStoreEvent()
+        public RegisterShipEventData()
         {
         }
     }

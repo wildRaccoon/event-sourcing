@@ -4,9 +4,9 @@ namespace ev.lib.domain.core
 {
     public class Ship
     {
-        public string Name {get; private set;}
-        public string RegistrationCode { get; private set;}
-        public Port Location {get; private set;}
+        public string Name {get; set;}
+        public string RegistrationCode { get; set;}
+        public Port Location {get; set;}
 
         public Ship()
         {
@@ -22,7 +22,7 @@ namespace ev.lib.domain.core
 
             if(location == null || location.Name == Port.AT_SEA.Name)
             {
-                throw new Exception($"Can'r register ship At Sea location: {name}: {code} : {location?.Name ?? "port not set"}");
+                throw new Exception($"Can't register ship At Sea location: {name}: {code} : {location?.Name ?? "port not set"}");
             }
 
             Name = name;
