@@ -9,7 +9,7 @@ namespace ev.lib.domain.events
         string shipName;
         string shipRegCode;
 
-        public RegisterShipEvent(Ship ship, Port port, string shipName,string shipRegCode)
+        public RegisterShipEvent(Ship ship, Port port, string shipName, string shipRegCode)
         {
             this.ship = ship;
             this.port = port;

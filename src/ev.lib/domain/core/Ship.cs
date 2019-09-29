@@ -4,6 +4,7 @@ namespace ev.lib.domain.core
 {
     public class Ship
     {
+        public string Id { get; set; }
         public string Name {get; set;}
         public string RegistrationCode { get; set;}
         public Port Location {get; set;}
