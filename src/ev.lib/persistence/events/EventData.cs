@@ -2,11 +2,13 @@ namespace ev.lib.persistence
 {
     public class EventData
     {
-        public string EventId {get; set;}
+        public string EventId { get; set; }
 
         /// <summary>
         /// timestamp - unix time with miliseconds
         /// </summary>
-        public long UTIssuedAt {get; set;}
+        public long Occured { get; set; }
+
+        public long Recorded { get; set; }
     }
 }

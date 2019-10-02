@@ -1,4 +1,5 @@
 ﻿using ev.lib.domain.core;
+using ev.lib.domain.events;
 using System;
 using Xunit;
 
@@ -10,7 +11,7 @@ namespace ev.test.domain.core
         public void RegisterShipSuccess()
         {
             var ship = new Ship();
-            ship.RegisterShip("name", "code", new Port() { Name = "port" } );
+            ship.RegisterShip(new RegisterShipEvent(ship, new Port() { Name = "port" }, "name", "code"));
 
             Assert.Equal("name", ship.Name);
             Assert.Equal("code", ship.RegistrationCode);
@@ -22,14 +23,14 @@ namespace ev.test.domain.core
         public void RegisterShipAlreadyRegistered()
         {
             var ship = new Ship();
-            ship.RegisterShip("name", "code", new Port() { Name = "port" });
+            ship.RegisterShip(new RegisterShipEvent(ship, new Port() { Name = "port" }, "name", "code"));
 
             Assert.Equal("name", ship.Name);
             Assert.Equal("code", ship.RegistrationCode);
             Assert.NotNull(ship.Location);
             Assert.Equal("port", ship.Location.Name);
 
-            Assert.Throws<Exception>(() => ship.RegisterShip("other name", "other code", new Port() { Name = "other port" }));
+            Assert.Throws<Exception>(() => ship.RegisterShip(new RegisterShipEvent(ship, new Port() { Name = "other port" }, "other name", "other code")));
         }
 
         [Fact(DisplayName = "RegisterShip:Null Port")]
@@ -37,7 +38,7 @@ namespace ev.test.domain.core
         {
             var ship = new Ship();
 
-            Assert.Throws<Exception>(() => ship.RegisterShip("name", "code", null));
+            Assert.Throws<Exception>(() => ship.RegisterShip(new RegisterShipEvent(ship, null, "name", "code")));
         }
 
         [Fact(DisplayName = "RegisterShip:At Sea Port")]
@@ -45,7 +46,7 @@ namespace ev.test.domain.core
         {
             var ship = new Ship();
 
-            Assert.Throws<Exception>(() => ship.RegisterShip("name", "code", Port.AT_SEA));
+            Assert.Throws<Exception>(() => ship.RegisterShip(new RegisterShipEvent(ship, Port.AT_SEA, "name", "code")));
         }
     }
 }

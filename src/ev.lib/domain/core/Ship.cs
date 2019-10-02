@@ -1,3 +1,4 @@
+using ev.lib.domain.events;
 using System;
 
 namespace ev.lib.domain.core
@@ -14,21 +15,21 @@ namespace ev.lib.domain.core
 
         }
 
-        public void RegisterShip(string name, string code, Port location)
+        public void RegisterShip(RegisterShipEvent @event)
         { 
             if(!string.IsNullOrEmpty(RegistrationCode))
             {
-                throw new Exception($"Ship already registered: {name}: {code} : {location.Name}");
+                throw new Exception($"Ship already registered: {Name}: {RegistrationCode} : {Location.Name}");
             }
 
-            if(location == null || location.Name == Port.AT_SEA.Name)
+            if(@event.port == null || @event.port.Name == Port.AT_SEA.Name)
             {
-                throw new Exception($"Can't register ship At Sea location: {name}: {code} : {location?.Name ?? "port not set"}");
+                throw new Exception($"Can't register ship At Sea location: {@event.name}: {@event.name} : {@event.port?.Name ?? "port not set"}");
             }
 
-            Name = name;
-            RegistrationCode = code;
-            Location = location;
+            Name = @event.name;
+            RegistrationCode = @event.code;
+            Location = @event.port;
         }
     }
 }
