@@ -1,4 +1,5 @@
 using ev.lib.domain.core;
+using System;
 
 namespace ev.lib.domain.events
 {
@@ -9,7 +10,7 @@ namespace ev.lib.domain.events
         public string name { private set; get; }
         public string code { private set; get; }
 
-        public RegisterShipEvent(Ship ship, Port port, string name, string code)
+        public RegisterShipEvent(DateTime occured,Ship ship, Port port, string name, string code) : base(occured)
         {
             this.ship = ship;
             this.port = port;

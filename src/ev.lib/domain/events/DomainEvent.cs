@@ -4,8 +4,15 @@ namespace ev.lib.domain.events
 {
     public abstract class DomainEvent
     {
-        public long Occured { private set; get; }
-        public long Recorded { private set; get; }
+        public DateTime Occured { private set; get; }
+        public DateTime Recorded { private set; get; }
+
+        public DomainEvent(DateTime occured)
+        {
+            Occured = occured;
+            Recorded = DateTime.Now;
+        }
+
         public abstract void Process();
     }
 }

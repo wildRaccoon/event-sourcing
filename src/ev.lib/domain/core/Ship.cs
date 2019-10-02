@@ -5,10 +5,10 @@ namespace ev.lib.domain.core
 {
     public class Ship
     {
-        public string Id { get; set; }
-        public string Name {get; set;}
-        public string RegistrationCode { get; set;}
-        public Port Location {get; set;}
+        public string Id { get; private set; }
+        public string Name {get; private set;}
+        public string RegistrationCode { get; private set;}
+        public Port Location {get; private set;}
 
         public Ship()
         {
@@ -29,6 +29,16 @@ namespace ev.lib.domain.core
 
             Name = @event.name;
             RegistrationCode = @event.code;
+            Location = @event.port;
+        }
+
+        public void Departure(DepartureEvent @event)
+        {
+            Location = Port.AT_SEA;
+        }
+
+        public void Arrive(ArriveEvent @event)
+        {
             Location = @event.port;
         }
     }
