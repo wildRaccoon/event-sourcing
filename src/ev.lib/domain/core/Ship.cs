@@ -15,6 +15,14 @@ namespace ev.lib.domain.core
 
         }
 
+        public Ship(string id, string name, string regcode, Port loc)
+        {
+            Id = id;
+            Name = name;
+            RegistrationCode = regcode;
+            Location = loc;
+        }
+
         public void RegisterShip(RegisterShipEvent @event)
         {
             if (!string.IsNullOrEmpty(RegistrationCode))
