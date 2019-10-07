@@ -8,7 +8,7 @@ namespace ev.lib.domain.events
         public Ship ship { private set; get; }
         public Port port { private set; get; }
 
-        public DepartureEvent(DateTime occured,Ship ship, Port port) : base(occured)
+        public DepartureEvent(DateTime occured, Ship ship, Port port) : base(occured)
         {
             this.ship = ship;
             this.port = port;

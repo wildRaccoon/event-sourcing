@@ -14,7 +14,7 @@ namespace ev.test.domain.events
             var p = new Port() { Name = "port name", InternationalCode = "int code of port" };
 
             var @event = new RegisterShipEvent(DateTime.Now, s, p, "ship name", "ship reg code");
-            
+
             @event.Process();
 
             Assert.Equal("ship name", s.Name);

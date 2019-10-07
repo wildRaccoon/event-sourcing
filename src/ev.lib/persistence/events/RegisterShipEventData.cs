@@ -6,9 +6,6 @@ namespace ev.lib.persistence.events
     {
         public string Code { get; set; }
         public string Name { get; set; }
-        public PortData Port { get; set; }
-        public RegisterShipEventData()
-        {
-        }
+        public string PortIntlCode { get; set; }
     }
 }
