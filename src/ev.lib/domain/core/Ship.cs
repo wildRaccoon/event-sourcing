@@ -47,7 +47,7 @@ namespace ev.lib.domain.core
 
         public void Arrive(ArriveEvent @event)
         {
-            Location = @event.port;
+            Location = @event.Port;
         }
     }
 }

@@ -6,9 +6,9 @@ namespace ev.lib.domain.core
 
         public string Name { get; set; }
 
-        public string InternationalCode { get; set; }
+        public string IntlCode { get; set; }
 
-        public static Port AT_SEA { get => new Port() { Name = "At Sea", InternationalCode = "OVERSEAS" }; }
+        public static Port AT_SEA { get => new Port() { Name = "At Sea", IntlCode = "OVERSEAS" }; }
 
         public Port()
         {

@@ -8,6 +8,6 @@ namespace ev.lib.persistence.entites.domain
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string InternationalCode { get; set; }
+        public string IntlCode { get; set; }
     }
 }

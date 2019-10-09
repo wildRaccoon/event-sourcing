@@ -10,7 +10,7 @@ namespace ev.test.domain.events
         [Fact(DisplayName = "DepartureShipEvent:Success")]
         public void DepartureShipEventSuccess()
         {
-            var p = new Port() { Name = "port name", InternationalCode = "intl code of port" };
+            var p = new Port() { Name = "port name", IntlCode = "intl code of port" };
             var s = new Ship("id", "ship name", "ship reg code", p);
 
             var @event = new DepartureEvent(DateTime.Now, s, p);
@@ -20,7 +20,7 @@ namespace ev.test.domain.events
             Assert.Equal("ship name", s.Name);
             Assert.Equal("ship reg code", s.RegistrationCode);
             Assert.NotNull(s.Location);
-            Assert.Equal(Port.AT_SEA.InternationalCode, s.Location.InternationalCode);
+            Assert.Equal(Port.AT_SEA.IntlCode, s.Location.IntlCode);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace ev.test.domain.events
         [Fact(DisplayName = "ArriveShipEvent:Success")]
         public void ArriveShipEventSuccess()
         {
-            var p = new Port() { Name = "port name", InternationalCode = "intl code of port" };
+            var p = new Port() { Name = "port name", IntlCode = "intl code of port" };
             var s = new Ship("id", "ship name", "ship reg code", Port.AT_SEA);
 
             var @event = new ArriveEvent(DateTime.Now, s, p);

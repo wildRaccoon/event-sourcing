@@ -5,18 +5,18 @@ namespace ev.lib.domain.events
 {
     public class ArriveEvent : DomainEvent
     {
-        public Ship ship { private set; get; }
-        public Port port { private set; get; }
+        public Ship Ship { private set; get; }
+        public Port Port { private set; get; }
 
         public ArriveEvent(DateTime occured, Ship ship, Port port) : base(occured)
         {
-            this.ship = ship;
-            this.port = port;
+            this.Ship = ship;
+            this.Port = port;
         }
 
         public override void Process()
         {
-            ship.Arrive(this);
+            Ship.Arrive(this);
         }
     }
 }
