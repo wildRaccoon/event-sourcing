@@ -1,7 +1,9 @@
-using ev.lib.persistence.entites.domain;
+using AutoMapper;
+using ev.lib.domain.events;
 
 namespace ev.lib.persistence.events
 {
+    [AutoMap(typeof(RegisterShipEvent))]
     public class RegisterShipEventData : ShipEventData
     {
         public string Code { get; set; }

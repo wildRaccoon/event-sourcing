@@ -15,9 +15,13 @@ namespace ev.lib.domain.core
 
         }
 
-        public Ship(string id, string name, string regcode, Port loc)
+        public Ship(string id)
         {
             Id = id;
+        }
+
+        public Ship(string id, string name, string regcode, Port loc): this(id)
+        {
             Name = name;
             RegistrationCode = regcode;
             Location = loc;
@@ -30,14 +34,14 @@ namespace ev.lib.domain.core
                 throw new Exception($"Ship already registered: {Name}: {RegistrationCode} : {Location.Name}");
             }
 
-            if (@event.port == null || @event.port.Name == Port.AT_SEA.Name)
+            if (@event.Port == null || @event.Port.Name == Port.AT_SEA.Name)
             {
-                throw new Exception($"Can't register ship At Sea location: {@event.name}: {@event.name} : {@event.port?.Name ?? "port not set"}");
+                throw new Exception($"Can't register ship At Sea location: {@event.Name}: {@event.Name} : {@event.Port?.Name ?? "port not set"}");
             }
 
-            Name = @event.name;
-            RegistrationCode = @event.code;
-            Location = @event.port;
+            Name = @event.Name;
+            RegistrationCode = @event.Code;
+            Location = @event.Port;
         }
 
         public void Departure(DepartureEvent @event)

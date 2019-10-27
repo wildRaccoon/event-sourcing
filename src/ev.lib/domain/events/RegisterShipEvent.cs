@@ -5,22 +5,22 @@ namespace ev.lib.domain.events
 {
     public class RegisterShipEvent : DomainEvent
     {
-        public Ship ship { private set; get; }
-        public Port port { private set; get; }
-        public string name { private set; get; }
-        public string code { private set; get; }
+        public Ship Ship { private set; get; }
+        public Port Port { private set; get; }
+        public string Name { private set; get; }
+        public string Code { private set; get; }
 
         public RegisterShipEvent(DateTime occured, Ship ship, Port port, string name, string code) : base(occured)
         {
-            this.ship = ship;
-            this.port = port;
-            this.name = name;
-            this.code = code;
+            this.Ship = ship;
+            this.Port = port;
+            this.Name = name;
+            this.Code = code;
         }
 
         public override void Process()
         {
-            ship.RegisterShip(this);
+            Ship.RegisterShip(this);
         }
     }
 }
