@@ -3,9 +3,8 @@ using System.Threading.Tasks;
 
 namespace ev.lib.domain.interfaces
 {
-    public interface IEventProcessor<T> 
-        where T: class
+    public interface IEventProcessor
     {
-        Task<T> ProcessAsync(DomainEvent @event);
+        Task<T> ProcessAsync<T>(T @event) where T: DomainEvent;
     }
 }
