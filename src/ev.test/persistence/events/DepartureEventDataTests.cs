@@ -21,9 +21,10 @@ namespace ev.test.persistence.events
 
             var mapper = new Mapper(configuration);
 
-            var departureEvent = new DepartureEvent(DateTime.Now, new Ship("ship id", "", "", Port.AT_SEA), new Port() { Id = "port id", Name = "port name", IntlCode = "intl code" });
+            var departureEvent = new DepartureEvent(DateTime.Now, "id", new Ship("ship id", "", "", Port.AT_SEA), new Port() { Id = "port id", Name = "port name", IntlCode = "intl code" });
             var departureEventData = mapper.Map<DepartureEventData>(departureEvent);
 
+            Assert.Equal(departureEvent.EventId, departureEventData.EventId);
             Assert.Equal(departureEvent.Ship.Id, departureEventData.ShipId);
             Assert.Equal(departureEvent.Port.IntlCode, departureEventData.PortIntlCode);
             Assert.Equal(new DateTimeOffset(departureEvent.Occured).ToUnixTimeMilliseconds(), departureEventData.Occured);

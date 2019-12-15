@@ -10,7 +10,7 @@ namespace ev.lib.domain.events
         public string Name { private set; get; }
         public string Code { private set; get; }
 
-        public RegisterShipEvent(DateTime occured, Ship ship, Port port, string name, string code) : base(occured)
+        public RegisterShipEvent(DateTime occured, string eventId, Ship ship, Port port, string name, string code) : base(occured, eventId)
         {
             this.Ship = ship;
             this.Port = port;

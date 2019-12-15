@@ -14,7 +14,7 @@ namespace ev.test.domain.app
         {
             public bool IsProcessed { get; set; } = false;
 
-            public CustomDomainEvent() : base(DateTime.MaxValue)
+            public CustomDomainEvent() : base(DateTime.MaxValue, "id")
             {
                 
             }

@@ -11,7 +11,7 @@ namespace ev.test.domain.core
         public void RegisterShipSuccess()
         {
             var ship = new Ship();
-            ship.RegisterShip(new RegisterShipEvent(DateTime.Now, ship, new Port() { Name = "port" }, "name", "code"));
+            ship.RegisterShip(new RegisterShipEvent(DateTime.Now, "id", ship, new Port() { Name = "port" }, "name", "code"));
 
             Assert.Equal("name", ship.Name);
             Assert.Equal("code", ship.RegistrationCode);
@@ -23,14 +23,14 @@ namespace ev.test.domain.core
         public void RegisterShipAlreadyRegistered()
         {
             var ship = new Ship();
-            ship.RegisterShip(new RegisterShipEvent(DateTime.Now, ship, new Port() { Name = "port" }, "name", "code"));
+            ship.RegisterShip(new RegisterShipEvent(DateTime.Now, "id", ship, new Port() { Name = "port" }, "name", "code"));
 
             Assert.Equal("name", ship.Name);
             Assert.Equal("code", ship.RegistrationCode);
             Assert.NotNull(ship.Location);
             Assert.Equal("port", ship.Location.Name);
 
-            Assert.Throws<Exception>(() => ship.RegisterShip(new RegisterShipEvent(DateTime.Now, ship, new Port() { Name = "other port" }, "other name", "other code")));
+            Assert.Throws<Exception>(() => ship.RegisterShip(new RegisterShipEvent(DateTime.Now, "id", ship, new Port() { Name = "other port" }, "other name", "other code")));
         }
 
         [Fact(DisplayName = "RegisterShip:Null Port")]
@@ -38,7 +38,7 @@ namespace ev.test.domain.core
         {
             var ship = new Ship();
 
-            Assert.Throws<Exception>(() => ship.RegisterShip(new RegisterShipEvent(DateTime.Now, ship, null, "name", "code")));
+            Assert.Throws<Exception>(() => ship.RegisterShip(new RegisterShipEvent(DateTime.Now, "id", ship, null, "name", "code")));
         }
 
         [Fact(DisplayName = "RegisterShip:At Sea Port")]
@@ -46,7 +46,7 @@ namespace ev.test.domain.core
         {
             var ship = new Ship();
 
-            Assert.Throws<Exception>(() => ship.RegisterShip(new RegisterShipEvent(DateTime.Now, ship, Port.AT_SEA, "name", "code")));
+            Assert.Throws<Exception>(() => ship.RegisterShip(new RegisterShipEvent(DateTime.Now, "id", ship, Port.AT_SEA, "name", "code")));
         }
     }
 }

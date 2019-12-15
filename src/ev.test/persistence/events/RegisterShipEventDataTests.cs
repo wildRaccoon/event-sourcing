@@ -21,9 +21,10 @@ namespace ev.test.persistence.events
 
             var mapper = new Mapper(configuration);
 
-            var registerShipEvent = new RegisterShipEvent(DateTime.Now, new Ship("id"), new Port() { Id = "port id", Name = "port name", IntlCode = "intl code" },"ship name", "ship code");
+            var registerShipEvent = new RegisterShipEvent(DateTime.Now, "id", new Ship("id"), new Port() { Id = "port id", Name = "port name", IntlCode = "intl code" },"ship name", "ship code");
             var registerShipEventData = mapper.Map<RegisterShipEventData>(registerShipEvent);
 
+            Assert.Equal(registerShipEvent.EventId, registerShipEventData.EventId);
             Assert.Equal(registerShipEvent.Ship.Id, registerShipEventData.ShipId);
             Assert.Equal(registerShipEvent.Port.IntlCode, registerShipEventData.PortIntlCode);
             Assert.Equal(registerShipEvent.Name, registerShipEventData.Name);

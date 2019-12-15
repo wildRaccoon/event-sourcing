@@ -13,7 +13,7 @@ namespace ev.test.domain.events
             var s = new Ship();
             var p = new Port() { Name = "port name", IntlCode = "int code of port" };
 
-            var @event = new RegisterShipEvent(DateTime.Now, s, p, "ship name", "ship reg code");
+            var @event = new RegisterShipEvent(DateTime.Now, "id", s, p, "ship name", "ship reg code");
 
             @event.Process();
 
