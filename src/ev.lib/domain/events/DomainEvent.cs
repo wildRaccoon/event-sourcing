@@ -1,16 +1,17 @@
 using System;
+using ev.lib.domain.interfaces;
 
 namespace ev.lib.domain.events
 {
-    public abstract class DomainEvent
+    public abstract class DomainEvent : IIdEntity
     {
-        public string EventId { private set; get; }
+        public string Id { private set; get; }
         public DateTime Occured { private set; get; }
         public DateTime Recorded { private set; get; }
 
         public DomainEvent(DateTime occured, string eventId)
         {
-            EventId = eventId;
+            Id = eventId;
             Occured = occured;
             Recorded = DateTime.Now;
         }

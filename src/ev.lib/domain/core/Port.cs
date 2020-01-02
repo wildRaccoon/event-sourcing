@@ -1,6 +1,8 @@
+using ev.lib.domain.interfaces;
+
 namespace ev.lib.domain.core
 {
-    public class Port
+    public class Port : IIdEntity
     {
         public string Id { get; set; }
 

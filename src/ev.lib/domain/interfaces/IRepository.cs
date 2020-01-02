@@ -2,11 +2,12 @@
 
 namespace ev.lib.domain.interfaces
 {
-    public interface IRepository
+    public interface IRepository<T>
+        where T : class, IIdEntity
     {
-        Task AddAsync<T>(T t) where T : class;
-        Task UpdateAsync<T>(T t) where T : class;
-        Task RemoveAsync<T>(T t) where T : class;
-        Task<T> GetAsync<T>(string id) where T : class;
+        Task AddAsync(T t);
+        Task UpdateAsync(T t);
+        Task RemoveAsync(T t);
+        Task<T> GetAsync(string id);
     }
 }

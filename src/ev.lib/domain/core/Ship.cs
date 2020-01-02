@@ -1,9 +1,10 @@
 using ev.lib.domain.events;
+using ev.lib.domain.interfaces;
 using System;
 
 namespace ev.lib.domain.core
 {
-    public class Ship
+    public class Ship : IIdEntity
     {
         public string Id { get; private set; }
         public string Name { get; private set; }
@@ -20,7 +21,7 @@ namespace ev.lib.domain.core
             Id = id;
         }
 
-        public Ship(string id, string name, string regcode, Port loc): this(id)
+        public Ship(string id, string name, string regcode, Port loc) : this(id)
         {
             Name = name;
             RegistrationCode = regcode;
