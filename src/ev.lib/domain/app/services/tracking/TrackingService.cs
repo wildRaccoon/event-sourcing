@@ -28,7 +28,7 @@ namespace ev.lib.domain.app.services.tracking
 
             var @event = new ArriveEvent(DateTime.Now, eventId, shipRef, port);
 
-            queueService.AddEvent(@event);
+            await queueService.AddEvent(@event);
         }
 
         public async Task DepartureAsync(string eventId, string shipCode, string portCode)
@@ -38,7 +38,7 @@ namespace ev.lib.domain.app.services.tracking
 
             var @event = new DepartureEvent(DateTime.Now, eventId, shipRef, port);
 
-            queueService.AddEvent(@event);
+            await queueService.AddEvent(@event);
         }
 
         public async Task RegisterShipAsync(string eventId, string shipCode, string portCode, string shipName)
@@ -48,7 +48,7 @@ namespace ev.lib.domain.app.services.tracking
 
             var @event = new RegisterShipEvent(DateTime.Now, eventId, shipRef, port, shipName, shipCode);
 
-            queueService.AddEvent(@event);
+            await queueService.AddEvent(@event);
         }
     }
 }
