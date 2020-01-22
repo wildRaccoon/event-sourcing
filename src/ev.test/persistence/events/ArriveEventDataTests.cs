@@ -4,6 +4,7 @@ using ev.lib.persistence.events;
 using ev.lib.domain.events;
 using System;
 using ev.lib.domain.core;
+using ev.test.utils;
 
 namespace ev.test.persistence.events
 {
@@ -19,7 +20,7 @@ namespace ev.test.persistence.events
 
             var mapper = new Mapper(configuration);
 
-            var arriveEvent = new ArriveEvent(DateTime.Now, "id", new Ship("ship id", "", "", Port.AT_SEA), new Port() { Id = "port id", Name = "port name", IntlCode = "intl code" });
+            var arriveEvent = new ArriveEvent(DateTime.Now, "id", new TestEntityRef<Ship>("ship id",null), new Port() { Id = "port id", Name = "port name", IntlCode = "intl code" });
             var arriveEventData = mapper.Map<ArriveEventData>(arriveEvent);
 
             Assert.Equal(arriveEvent.Id, arriveEventData.Id);

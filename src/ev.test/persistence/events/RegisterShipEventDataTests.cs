@@ -2,9 +2,8 @@
 using ev.lib.domain.core;
 using ev.lib.domain.events;
 using ev.lib.persistence.events;
+using ev.test.utils;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace ev.test.persistence.events
@@ -21,7 +20,7 @@ namespace ev.test.persistence.events
 
             var mapper = new Mapper(configuration);
 
-            var registerShipEvent = new RegisterShipEvent(DateTime.Now, "id", new Ship("id"), new Port() { Id = "port id", Name = "port name", IntlCode = "intl code" },"ship name", "ship code");
+            var registerShipEvent = new RegisterShipEvent(DateTime.Now, "id", new TestEntityRef<Ship>("ship id", null), new Port() { Id = "port id", Name = "port name", IntlCode = "intl code" }, "ship name", "ship code");
             var registerShipEventData = mapper.Map<RegisterShipEventData>(registerShipEvent);
 
             Assert.Equal(registerShipEvent.Id, registerShipEventData.Id);

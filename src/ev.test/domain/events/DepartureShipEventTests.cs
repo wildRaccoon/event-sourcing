@@ -1,6 +1,7 @@
 using System;
 using ev.lib.domain.core;
 using ev.lib.domain.events;
+using ev.test.utils;
 using Xunit;
 
 namespace ev.test.domain.events
@@ -13,7 +14,7 @@ namespace ev.test.domain.events
             var p = new Port() { Name = "port name", IntlCode = "intl code of port" };
             var s = new Ship("id", "ship name", "ship reg code", p);
 
-            var @event = new DepartureEvent(DateTime.Now, "id", s, p);
+            var @event = new DepartureEvent(DateTime.Now, "id", new TestEntityRef<Ship>("id",s), p);
 
             @event.Process();
 
