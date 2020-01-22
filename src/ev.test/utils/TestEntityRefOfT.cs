@@ -4,7 +4,7 @@ using ev.lib.domain.interfaces;
 namespace ev.test.utils
 {
     public class TestEntityRef<T> : IEntityRef<T>
-        where T : class
+        where T : IIdEntity
     {
         public TestEntityRef(string id,T t)
         {
