@@ -9,7 +9,7 @@ namespace ev.test.utils
     public static class TestBed
     {
         public static IServiceProvider Create<T>(MockBehavior mockBehavior = MockBehavior.Loose)
-            where T: class
+            where T : class
         {
             var sc = new ServiceCollection();
 
@@ -25,17 +25,17 @@ namespace ev.test.utils
                 throw new Exception($"Constructor not found for type {inputType.FullName}");
             }
 
-            var mockRepo = new MockRepository(mockBehavior);
+            var method = typeof(Mock).GetMethod("Of",new Type[] { typeof(MockBehavior) });
 
-            foreach(var param in constructor.GetParameters())
+            foreach (var param in constructor.GetParameters())
             {
-                // if(param.ParameterType.IsGenericType)
-                // {
-                //     continue;
-                // }
-                var t = param.ParameterType.FullName;
-                Console.WriteLine(t);
+                sc.AddSingleton(
+                    param.ParameterType, 
+                    sp => method.MakeGenericMethod(param.ParameterType).Invoke(null,new object[] { mockBehavior })
+                );
             }
+
+            sc.AddSingleton<T>();
 
             return sc.BuildServiceProvider();
         }
