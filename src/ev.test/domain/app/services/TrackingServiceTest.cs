@@ -16,10 +16,10 @@ namespace ev.test.domain.app.services
         {
             var sp = TestBed.Create<TrackingService>(MockBehavior.Strict);
 
-            var queryMock = Mock.Get(sp.GetService<IQueryPortByIntCode>());
+            var queryMock = Mock.Get(sp.GetService<ISingleQueryPortByIntCode>());
 
-            queryMock.Setup(s => s.Execute("port code"))
-                .Returns(Task.FromResult(new Port() { Id = "id of port", IntlCode = "port code", Name = "port name" }));
+            queryMock.Setup(s => s.Execute())
+                .Returns(new Port() { Id = "id of port", IntlCode = "port code", Name = "port name" });
 
             var srv = sp.GetService<TrackingService>();
 

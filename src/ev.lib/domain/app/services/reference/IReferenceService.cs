@@ -1,20 +1,17 @@
-﻿using ev.lib.domain.interfaces;
+﻿using ev.lib.domain.app.queries;
+using ev.lib.domain.interfaces;
 using System;
 
 namespace ev.lib.domain.app.services.reference
 {
     public interface IReferenceService<T>
-        where T : IIdEntity
+        where T : class, IIdEntity, new()
     {
         IEntityRef<T> GetRef(string id);
         /// <summary>
-        /// find entity by filter on property
+        /// find entity by query
         /// </summary>
-        /// <typeparam name="TOut"></typeparam>
-        /// <param name="prop">filter by property</param>
-        /// <param name="val">value for comparison</param>
-        /// <returns></returns>
-        IEntityRef<T> GetRef<TOut>(Func<T, TOut> prop, TOut val);
+        IEntityRef<T> GetRef(ISingleQuery<T> query);
         /// <summary>
         /// get reference for new instance
         /// </summary>

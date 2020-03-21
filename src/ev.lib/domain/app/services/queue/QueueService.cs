@@ -7,7 +7,7 @@ namespace ev.lib.domain.app.services.queue
 {
     public class QueueService : IQueueService
     {
-        Channel<DomainEvent> channel = Channel.CreateUnbounded<DomainEvent>(new UnboundedChannelOptions()
+        readonly Channel<DomainEvent> channel = Channel.CreateUnbounded<DomainEvent>(new UnboundedChannelOptions()
         {
             SingleReader = true,
             SingleWriter = false,
@@ -27,7 +27,8 @@ namespace ev.lib.domain.app.services.queue
             {
                 if (reader.TryRead(out DomainEvent @event))
                 {
-                    Console.WriteLine($"{@event.Id} {@event.Occured}");
+                    Console.WriteLine($"{@event.GetType().FullName} {@event.Id} {@event.Occured}");
+                    @event.Process();
                 }
             }
         }

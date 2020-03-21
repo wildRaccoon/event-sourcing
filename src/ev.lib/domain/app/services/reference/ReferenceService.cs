@@ -1,27 +1,34 @@
 using ev.lib.domain.interfaces;
+using System;
+using Microsoft.Extensions.DependencyInjection;
+using ev.lib.domain.app.queries;
 
 namespace ev.lib.domain.app.services.reference
 {
     public class ReferenceService<T> : IReferenceService<T>
-        where T : IIdEntity
+        where T : class, IIdEntity, new()
     {
-        public ReferenceService()
+        IServiceScope serviceScope;
+        IServiceProvider serviceProvider;
+        public ReferenceService(IServiceProvider serviceProvider)
         {
+            this.serviceScope = serviceProvider.CreateScope();
+            this.serviceProvider = serviceScope.ServiceProvider;
         }
 
         public IEntityRef<T> GetRef(string id)
         {
-            throw new System.NotImplementedException();
+            return serviceProvider.GetService<EntityRefById<T>>().UseId(id);
         }
 
-        public IEntityRef<T> GetRef<TOut>(System.Func<T, TOut> prop, TOut val)
+        public IEntityRef<T> GetRef(ISingleQuery<T> query)
         {
-            throw new System.NotImplementedException();
+            return serviceProvider.GetService<EntityRefByQuery<T>>().UseQuery(query);
         }
 
         public IEntityRef<T> GetRef()
         {
-            throw new System.NotImplementedException();
+            return serviceProvider.GetService<EntityRefNew<T>>();
         }
     }
 }
