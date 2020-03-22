@@ -28,7 +28,7 @@ namespace ev.lib.domain.app.services.queue
                 if (reader.TryRead(out DomainEvent @event))
                 {
                     Console.WriteLine($"{@event.GetType().FullName} {@event.Id} {@event.Occured}");
-                    @event.Process();
+                    await @event.Process();
                 }
             }
         }
