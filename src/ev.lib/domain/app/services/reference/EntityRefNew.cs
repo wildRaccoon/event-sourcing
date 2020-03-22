@@ -1,5 +1,6 @@
 ﻿using ev.lib.domain.interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace ev.lib.domain.app.services.reference
 {
@@ -12,11 +13,18 @@ namespace ev.lib.domain.app.services.reference
             this.repository = repository;
         }
 
-        public void Process(Action<T> action)
+        public string Id { get; private set; }
+
+        public async Task Process(Action<T> action)
         {
             var item = new T();
+            
+            await repository.AddAsync(item);
+            Id = item.Id;
+
             action(item);
-            repository.Add(item);
+            
+            await repository.UpdateAsync(item);
         }
     }
 }

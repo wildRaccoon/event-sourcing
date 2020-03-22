@@ -26,7 +26,7 @@ namespace ev.lib.domain.app.services.tracking
 
         public async Task ArrivalAsync(string eventId, string shipCode, string portCode)
         {
-            var port = serviceProvider.GetService<ISingleQueryPortByIntCode>().UseIntCode(portCode).Execute();
+            var port = await serviceProvider.GetService<ISingleQueryPortByIntCode>().UseIntCode(portCode).ExecuteAsync();
             var shipQuery = serviceProvider.GetService<ISingleQueryShipByRegCode>().UseRegCode(shipCode);
             var shipRef = referenceService.GetRef(shipQuery);
 
@@ -37,7 +37,7 @@ namespace ev.lib.domain.app.services.tracking
 
         public async Task DepartureAsync(string eventId, string shipCode, string portCode)
         {
-            var port = serviceProvider.GetService<ISingleQueryPortByIntCode>().UseIntCode(portCode).Execute();
+            var port = await serviceProvider.GetService<ISingleQueryPortByIntCode>().UseIntCode(portCode).ExecuteAsync();
             var shipQuery = serviceProvider.GetService<ISingleQueryShipByRegCode>().UseRegCode(shipCode);
             var shipRef = referenceService.GetRef(shipQuery);
 
@@ -48,7 +48,7 @@ namespace ev.lib.domain.app.services.tracking
 
         public async Task RegisterShipAsync(string eventId, string shipCode, string portCode, string shipName)
         {
-            var port = serviceProvider.GetService<ISingleQueryPortByIntCode>().UseIntCode(portCode).Execute();
+            var port = await serviceProvider.GetService<ISingleQueryPortByIntCode>().UseIntCode(portCode).ExecuteAsync();
             var shipRef = referenceService.GetRef();
 
             var @event = new RegisterShipEvent(DateTime.Now, eventId, shipRef, port, shipName, shipCode);

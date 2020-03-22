@@ -24,7 +24,7 @@ namespace ev.test.persistence.events
             var arriveEventData = mapper.Map<ArriveEventData>(arriveEvent);
 
             Assert.Equal(arriveEvent.Id, arriveEventData.Id);
-            //Assert.Equal(arriveEvent.Ship.Id, arriveEventData.ShipId);
+            Assert.Equal(arriveEvent.Ship.Id, arriveEventData.ShipId);
             Assert.Equal(arriveEvent.Port.IntlCode, arriveEventData.PortIntlCode);
             Assert.Equal(new DateTimeOffset(arriveEvent.Occured).ToUnixTimeMilliseconds(), arriveEventData.Occured);
             Assert.Equal(new DateTimeOffset(arriveEvent.Recorded).ToUnixTimeMilliseconds(), arriveEventData.Recorded);

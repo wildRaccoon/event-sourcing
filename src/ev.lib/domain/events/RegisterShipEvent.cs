@@ -1,6 +1,7 @@
 using ev.lib.domain.core;
 using ev.lib.domain.interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace ev.lib.domain.events
 {
@@ -19,9 +20,9 @@ namespace ev.lib.domain.events
             this.Code = code;
         }
 
-        public override void Process()
+        public override async Task Process()
         {
-            Ship.Process(s => s.RegisterShip(this));
+            await Ship.Process(s => s.RegisterShip(this));
         }
     }
 }

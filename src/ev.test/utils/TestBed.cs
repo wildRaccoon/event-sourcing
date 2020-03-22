@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
@@ -8,10 +7,12 @@ namespace ev.test.utils
 {
     public static class TestBed
     {
-        public static IServiceProvider Create<T>(MockBehavior mockBehavior = MockBehavior.Loose)
+        public static IServiceProvider Create<T>(MockBehavior mockBehavior = MockBehavior.Loose, Action<IServiceCollection> action = null)
             where T : class
         {
             var sc = new ServiceCollection();
+
+            action?.Invoke(sc);
 
             var inputType = typeof(T);
 

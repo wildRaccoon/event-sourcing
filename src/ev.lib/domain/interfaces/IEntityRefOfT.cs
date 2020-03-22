@@ -1,10 +1,11 @@
 using System;
+using System.Threading.Tasks;
 
 namespace ev.lib.domain.interfaces
 {
-    public interface IEntityRef<T>
+    public interface IEntityRef<T> : IIdEntity
         where T: IIdEntity
     {
-        void Process(Action<T> @action); 
+        Task Process(Action<T> @action); 
     }
 }

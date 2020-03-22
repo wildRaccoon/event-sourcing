@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using ev.lib.domain.interfaces;
 
 namespace ev.lib.domain.events
@@ -16,6 +17,6 @@ namespace ev.lib.domain.events
             Recorded = DateTime.Now;
         }
 
-        public abstract void Process();
+        public abstract Task Process();
     }
 }

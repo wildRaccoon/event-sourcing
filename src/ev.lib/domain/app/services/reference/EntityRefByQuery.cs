@@ -1,6 +1,7 @@
 ﻿using ev.lib.domain.app.queries;
 using ev.lib.domain.interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace ev.lib.domain.app.services.reference
 {
@@ -14,6 +15,8 @@ namespace ev.lib.domain.app.services.reference
             this.repository = repository;
         }
 
+        public string Id { get; private set; }
+
         public IEntityRef<T> UseQuery(ISingleQuery<T> query)
         {
             if (this.query != null)
@@ -26,11 +29,12 @@ namespace ev.lib.domain.app.services.reference
             return this;
         }
 
-        public void Process(Action<T> action)
+        public async Task Process(Action<T> action)
         {
-            var item = query.Execute();
+            var item = await query.ExecuteAsync();
+            Id = item.Id;
             action(item);
-            repository.Update(item);
+            await repository.UpdateAsync(item);
         }
     }
 }

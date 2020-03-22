@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using ev.lib.domain.interfaces;
 
 namespace ev.test.utils
@@ -16,7 +17,7 @@ namespace ev.test.utils
 
         private T entity { get; set; }
 
-        public void Process(Action<T> action)
+        public async Task Process(Action<T> action)
         {
             action.Invoke(entity);
         }
