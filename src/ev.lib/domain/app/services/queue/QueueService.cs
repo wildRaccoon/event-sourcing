@@ -1,7 +1,7 @@
 ﻿using ev.lib.domain.events;
 using System.Threading.Tasks;
 using System.Threading.Channels;
-using System;
+using Microsoft.Extensions.Logging;
 
 namespace ev.lib.domain.app.services.queue
 {
@@ -15,10 +15,12 @@ namespace ev.lib.domain.app.services.queue
         });
 
         Task readTask;
+        ILogger<QueueService> logger;
 
-        public QueueService()
+        public QueueService(ILogger<QueueService> logger)
         {
             readTask = Consume(channel.Reader);
+            this.logger = logger;
         }
 
         private async Task Consume(ChannelReader<DomainEvent> reader)
@@ -27,7 +29,7 @@ namespace ev.lib.domain.app.services.queue
             {
                 if (reader.TryRead(out DomainEvent @event))
                 {
-                    Console.WriteLine($"{@event.GetType().FullName} {@event.Id} {@event.Occured}");
+                    logger.LogInformation($"Process Event: {@event.GetType().FullName} {@event.Id} {@event.Occured}");
                     await @event.Process();
                 }
             }
@@ -35,6 +37,7 @@ namespace ev.lib.domain.app.services.queue
 
         public async Task AddEvent<T>(T @event) where T : DomainEvent
         {
+            logger.LogInformation($"Add Event: {@event.GetType().FullName} {@event.Id} {@event.Occured}");
             await channel.Writer.WriteAsync(@event);
         }
     }

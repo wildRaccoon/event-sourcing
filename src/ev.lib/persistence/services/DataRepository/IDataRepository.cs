@@ -1,4 +1,8 @@
 using ev.lib.domain.interfaces;
+using MongoDB.Driver;
+using System;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace ev.lib.persistence.services.DataRepository
 {
@@ -6,6 +10,6 @@ namespace ev.lib.persistence.services.DataRepository
         where TApp : class, IIdEntity
         where TData : class, IIdEntity
     {
-         
+        Task<TApp> QuerySingle(Expression<Func<TData, bool>> filter);
     }
 }

@@ -5,14 +5,16 @@ using System.Threading.Tasks;
 
 namespace ev.lib.domain.app.services.reference
 {
-    public class EntityRefByQuery<T> : IEntityRef<T>
+    public class EntityRef<T> : IEntityRef<T>
             where T : class, IIdEntity, new()
     {
         readonly IRepository<T> repository;
         ISingleQuery<T> query;
-        public EntityRefByQuery(IRepository<T> repository)
+        IEventGateway eventGateway;
+        public EntityRef(IRepository<T> repository, IEventGateway eventGateway)
         {
             this.repository = repository;
+            this.eventGateway = eventGateway;
         }
 
         public string Id { get; private set; }
@@ -35,6 +37,7 @@ namespace ev.lib.domain.app.services.reference
             Id = item.Id;
             action(item);
             await repository.UpdateAsync(item);
+            await eventGateway.PublishAsync(item);
         }
     }
 }
