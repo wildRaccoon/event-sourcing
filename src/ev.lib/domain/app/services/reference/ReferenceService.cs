@@ -19,18 +19,18 @@ namespace ev.lib.domain.app.services.reference
         public IEntityRef<T> GetRef(string id)
         {
             var queryById = serviceProvider.GetService<ISingleQueryById<T>>();
-            return serviceProvider.GetService<EntityRef<T>>().UseQuery(queryById);
+            return serviceProvider.GetService<IEntityRef<T>>().UseQuery(queryById);
         }
 
         public IEntityRef<T> GetRef(ISingleQuery<T> query)
         {
-            return serviceProvider.GetService<EntityRef<T>>().UseQuery(query);
+            return serviceProvider.GetService<IEntityRef<T>>().UseQuery(query);
         }
 
         public IEntityRef<T> GetRef()
         {
             var queryAquireNew = serviceProvider.GetService<ISingleQueryAquireNew<T>>();
-            return serviceProvider.GetService<EntityRef<T>>().UseQuery(queryAquireNew);
+            return serviceProvider.GetService<IEntityRef<T>>().UseQuery(queryAquireNew);
         }
     }
 }

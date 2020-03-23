@@ -2,6 +2,6 @@
 {
     public interface IIdEntity
     {
-        string Id { get; }
+        string Id { get; set; }
     }
 }

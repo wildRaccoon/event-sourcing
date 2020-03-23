@@ -29,7 +29,7 @@ namespace ev.lib.persistence.queries
 
         public ISingleQueryPortByIntCode UseIntCode(string intCode)
         {
-            if (!string.IsNullOrEmpty(intCode))
+            if (!string.IsNullOrEmpty(this.intCode))
             {
                 throw new Exception($"IntCode value already setted up.");
             }

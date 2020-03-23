@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Threading.Channels;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace ev.lib.domain.app.services.queue
 {
@@ -27,12 +28,22 @@ namespace ev.lib.domain.app.services.queue
         {
             while (await reader.WaitToReadAsync())
             {
-                if (reader.TryRead(out DomainEvent @event))
+                var @event = await reader.ReadAsync();
+
+                logger.LogInformation($"Process Event: {@event.GetType().FullName} {@event.Id} {@event.Occured}");
+
+                try
                 {
-                    logger.LogInformation($"Process Event: {@event.GetType().FullName} {@event.Id} {@event.Occured}");
                     await @event.Process();
                 }
+                catch (Exception ex)
+                {
+                    logger.LogError($"Error:  {@event.GetType().FullName} {@event.Id} {@event.Occured}", ex);
+                }
+                
             }
+
+            logger.LogWarning($"Read Process Completed.");
         }
 
         public async Task AddEvent<T>(T @event) where T : DomainEvent

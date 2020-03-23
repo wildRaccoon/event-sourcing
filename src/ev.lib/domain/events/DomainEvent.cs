@@ -6,7 +6,7 @@ namespace ev.lib.domain.events
 {
     public abstract class DomainEvent : IIdEntity
     {
-        public string Id { private set; get; }
+        public string Id { set; get; }
         public DateTime Occured { private set; get; }
         public DateTime Recorded { private set; get; }
 

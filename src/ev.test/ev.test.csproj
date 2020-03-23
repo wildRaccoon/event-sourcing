@@ -26,8 +26,4 @@
     <ProjectReference Include="..\ev.lib\ev.lib.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="domain\app" />
-  </ItemGroup>
-
 </Project>

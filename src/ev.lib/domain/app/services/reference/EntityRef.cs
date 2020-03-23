@@ -17,7 +17,7 @@ namespace ev.lib.domain.app.services.reference
             this.eventGateway = eventGateway;
         }
 
-        public string Id { get; private set; }
+        public string Id { get; set; }
 
         public IEntityRef<T> UseQuery(ISingleQuery<T> query)
         {
