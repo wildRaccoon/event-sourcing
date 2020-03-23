@@ -6,7 +6,7 @@ using MongoDB.Bson;
 
 namespace ev.lib.persistence.entites.domain
 {
-    [AutoMap(typeof(Ship))]
+    [AutoMap(typeof(Ship), ReverseMap = true)]
     public class ShipData : IIdEntity
     {
         [BsonId]

@@ -13,14 +13,10 @@ namespace ev.lib.persistence.services.DataRepository
     {
         private IMapper mapper;
         private IMongoCollection<TData> collection;
-        public DataRepositoryService(IMongoDatabase client)
+        public DataRepositoryService(IMongoDatabase client, IMapper mapper)
         {
             this.collection = client.GetCollection<TData>(typeof(TData).FullName);
-            this.mapper = new Mapper(new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<TApp, TData>();
-                cfg.CreateMap<TData, TApp>();
-            }));
+            this.mapper = mapper;
         }
 
         public async Task AddAsync(TApp t)

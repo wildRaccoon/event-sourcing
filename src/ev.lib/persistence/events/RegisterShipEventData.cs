@@ -3,7 +3,7 @@ using ev.lib.domain.events;
 
 namespace ev.lib.persistence.events
 {
-    [AutoMap(typeof(RegisterShipEvent))]
+    [AutoMap(typeof(RegisterShipEvent), ReverseMap = true)]
     public class RegisterShipEventData : ShipEventData
     {
         public string Code { get; set; }

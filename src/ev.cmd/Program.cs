@@ -20,21 +20,24 @@ namespace ev.cmd
             var hostBuilder = new HostBuilder()
                 .ConfigureServices((ctx, sc) =>
                 {
+                    var assembly = Assembly.GetAssembly(typeof(ITrackingService));
+
                     sc.AddSingleton<IHostedService, ConsoleHostService>();
+                    sc.AddAutoMapper(assembly);
 
                     sc.Scan(s =>
-                        s.FromAssemblyOf<ITrackingService>()
+                        s.FromAssemblies(assembly)
                             .AddClasses(x => x.Where(f => f.Name.Contains("Service")))
                             .AsImplementedInterfaces()
                             .WithSingletonLifetime());
 
                     sc.Scan(s =>
-                        s.FromAssemblyOf<ITrackingService>()
+                        s.FromAssemblies(assembly)
                             .AddClasses(x => x.Where(f => !f.Name.Contains("Service")))
                             .AsImplementedInterfaces()
                             .WithTransientLifetime());
 
-                    var assembly = Assembly.GetAssembly(typeof(ITrackingService));
+
 
                     var types = (from t in assembly.GetTypes()
                                  where t.GetCustomAttribute<AutoMapAttribute>() != null

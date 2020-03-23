@@ -7,9 +7,9 @@ namespace ev.lib.domain.core
     public class Ship : IIdEntity
     {
         public string Id { get; set; }
-        public string Name { get; private set; }
-        public string RegistrationCode { get; private set; }
-        public Port Location { get; private set; }
+        public string Name { get; set; }
+        public string RegistrationCode { get; set; }
+        public Port Location { get; set; }
 
         public Ship()
         {

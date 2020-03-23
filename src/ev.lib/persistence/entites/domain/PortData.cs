@@ -6,7 +6,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace ev.lib.persistence.entites.domain
 {
-    [AutoMap(typeof(Port))]
+    [AutoMap(typeof(Port),ReverseMap = true)]
     public class PortData : IIdEntity
     {
         [BsonId]

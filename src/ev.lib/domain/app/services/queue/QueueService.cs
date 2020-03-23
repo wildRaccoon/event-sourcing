@@ -38,7 +38,7 @@ namespace ev.lib.domain.app.services.queue
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError($"Error:  {@event.GetType().FullName} {@event.Id} {@event.Occured}", ex);
+                    logger.LogError(ex, $"Error:  {@event.GetType().FullName} {@event.Id} {@event.Occured}");
                 }
                 
             }
